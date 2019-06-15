@@ -12,7 +12,7 @@ const { TextEncoder, TextDecoder } = require('util');                   // node 
 
 // eosjs set
 const rpc = new JsonRpc(config.rpc_addr, { fetch });
-const signatureProvider = new JsSignatureProvider([config.produver_prikey]);
+const signatureProvider = new JsSignatureProvider([config.producer_prikey]);
 const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
 /**
@@ -31,11 +31,11 @@ const claimrewards = async (trytimes) => {
                 account: 'eosio',
                 name: 'claimrewards',
                 authorization: [{
-                    actor: config.produver_name,
+                    actor: config.producer_name,
                     permission: 'active',
                 }],
                 data: {
-                    owner: config.produver_name,
+                    owner: config.producer_name,
                 },
             }]
         }, {

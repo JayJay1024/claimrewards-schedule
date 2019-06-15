@@ -18,7 +18,7 @@ const config = {
     schedule_time: '10 10 13 * * *', // 每天 13:10:10
 
     rpc_addr: 'http://127.0.0.1:8888',
-    produver_name: 'bob',
-    produver_prikey: '5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr',  // bob
+    producer_name: 'bob',
+    producer_prikey: '5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr',  // bob
 };
 module.exports = config;
