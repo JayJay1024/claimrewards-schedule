@@ -1,0 +1,36 @@
+{
+  "name": "claimrewards-schedule",
+  "version": "1.0.0",
+  "description": "Claim producer rewards schedule",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js",
+    "start": "pm2 start app.js --name Claimschedule --env production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucienLau/claimrewards-schedule.git"
+  },
+  "keywords": [
+    "EOS",
+    "BOS",
+    "claimrewards",
+    "claim",
+    "rewards"
+  ],
+  "author": "ly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucienLau/claimrewards-schedule/issues"
+  },
+  "homepage": "https://github.com/LucienLau/claimrewards-schedule#readme",
+  "dependencies": {
+    "eosjs": "^20.0.0",
+    "log4js": "^4.3.1",
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "pm2": "^3.5.1"
+  }
+}
