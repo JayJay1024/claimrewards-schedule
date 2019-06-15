@@ -1,7 +1,7 @@
 'use strict';
 
 const config = {
-    debug: false,
+    debug: true,
     log_dir: `${__dirname}/logs`,
 
     // https://www.npmjs.com/package/node-cron
