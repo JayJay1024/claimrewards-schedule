@@ -19,9 +19,9 @@ const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), te
  * 超级节点领取奖励
  */
 const claimrewards = async (trytimes) => {
-    logger.info('try claimrewards: ', trytimes);
+    // logger.info('try claimrewards: ', trytimes);
     if (!trytimes || trytimes < 0) {
-        logger.info('cancel claimrewards cause trytimes');
+        logger.info('cancel claimrewards cause trytimes:', trytimes);
         return;
     }
 
@@ -45,13 +45,12 @@ const claimrewards = async (trytimes) => {
         logger.info('claimrewards result:\n', result);
     } catch (err) {
         logger.error('claimrewards caught exeption:\n', err);
-
-        if (err instanceof RpcError) {
-            logger.error('rpc error:\n', JSON.stringify(err.json, null, 2));
-            setTimeout(() => {
-                claimrewards(--trytimes);
-            }, 1000 * 60);  // try again 60s later
-        }
+        // if (err instanceof RpcError) {
+        //     logger.error('rpc error:\n', JSON.stringify(err.json, null, 2));
+        // }
+        setTimeout(() => {
+            claimrewards(--trytimes);
+        }, 1000 * 60);  // try again 60s later
     }
 };
 
@@ -65,7 +64,7 @@ const run = async () => {
         cron.schedule(expression, () => {
             claimrewards(3);
         });
-        logger.info('started a schedule successfully(second minute hour day_of_month month day_of_week): ', expression);
+        logger.info('started a schedule successfully(second minute hour day_of_month month day_of_week): ', expression, '\n');
     } else {
         logger.error('invalid expression: ', expression);
         process.exit(1);
