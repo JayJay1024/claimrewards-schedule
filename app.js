@@ -50,7 +50,7 @@ const claimrewards = async (trytimes) => {
         // }
         setTimeout(() => {
             claimrewards(--trytimes);
-        }, 1000 * 60);  // try again 60s later
+        }, 1000 * 30);  // try again 30s later
     }
 };
 
