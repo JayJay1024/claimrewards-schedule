@@ -18,7 +18,7 @@ const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), te
 /**
  * 超级节点领取奖励
  */
-const claimrewards = async (trytimes) => {
+const claimrewards = async (trytimes = 1) => {
     // logger.info('try claimrewards: ', trytimes);
     if (!trytimes || trytimes < 0) {
         logger.info('cancel claimrewards cause trytimes:', trytimes);
