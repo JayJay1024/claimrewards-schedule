@@ -15,6 +15,9 @@ const rpc = new JsonRpc(config.rpc_addr, { fetch });
 const signatureProvider = new JsSignatureProvider([config.producer_prikey]);
 const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
+// globa task
+var task;
+
 /**
  * 超级节点领取奖励
  */
@@ -55,20 +58,29 @@ const claimrewards = async (trytimes = 1) => {
 };
 
 /**
- * run app
+ * start
  */
-const run = async () => {
-    let expression = config.schedule_time;
+const start = (expression) => {
+    if (task) {
+        task.destroy();
+    }
+
     if (cron.validate(expression)) {
         logger.info('start a schedule...');
-        cron.schedule(expression, () => {
+        task = cron.schedule(expression, () => {
             claimrewards(3);
+
+            // next
+            let later  = 1;  // 1秒钟
+            let next   = new Date((Math.ceil(Date.now() / 1000) + later) * 1000);
+            expression = `${next.getSeconds()} ${next.getMinutes()} ${next.getHours()} * * *`;
+            start(expression);
         });
         logger.info('started a schedule successfully(second minute hour day_of_month month day_of_week): ', expression, '\n');
     } else {
         logger.error('invalid expression: ', expression);
         process.exit(1);
     }
-}
+};
 
-run();
+start(config.schedule_time);
