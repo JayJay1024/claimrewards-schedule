@@ -46,6 +46,12 @@ const claimrewards = async (trytimes = 1) => {
             expireSeconds: 30,  // 超时秒数，整数
         });
         logger.info('claimrewards result:\n', result);
+
+        // next
+        let later  = 86400 + 1;  // 1天后的下1秒
+        let next   = new Date((Math.ceil(Date.now() / 1000) + later) * 1000);
+        let expression = `${next.getSeconds()} ${next.getMinutes()} ${next.getHours()} ${next.getDate()} * *`;
+        start(expression);
     } catch (err) {
         logger.error('claimrewards caught exeption:\n', err);
         // if (err instanceof RpcError) {
@@ -68,13 +74,7 @@ const start = (expression) => {
     if (cron.validate(expression)) {
         logger.info('start a schedule...');
         task = cron.schedule(expression, () => {
-            claimrewards(3);
-
-            // next
-            let later  = 1;  // 1秒钟
-            let next   = new Date((Math.ceil(Date.now() / 1000) + later) * 1000);
-            expression = `${next.getSeconds()} ${next.getMinutes()} ${next.getHours()} * * *`;
-            start(expression);
+            claimrewards(5);
         });
         logger.info('started a schedule successfully(second minute hour day_of_month month day_of_week): ', expression, '\n');
     } else {
