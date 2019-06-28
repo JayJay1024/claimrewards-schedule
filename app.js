@@ -45,7 +45,11 @@ const claimrewards = async (trytimes = 1) => {
             blocksBehind: 3,    // 滞后块数，整数
             expireSeconds: 30,  // 超时秒数，整数
         });
-        logger.info('claimrewards result:\n', result);
+        if (typeof result === 'object') {
+            logger.info('claimrewards result:\n', JSON.stringify(result));
+        } else {
+            logger.info('claimrewards result:\n', result);
+        }
 
         // next
         let later  = 86400 + 1;  // 1天后的下1秒
